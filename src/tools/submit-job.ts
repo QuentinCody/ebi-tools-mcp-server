@@ -8,6 +8,8 @@ import {
 } from "@bio-mcp/shared/codemode/response";
 import { shouldStage, stageToDoAndRespond } from "@bio-mcp/shared/staging/utils";
 
+const DEFAULT_EMAIL = "QuentinCody@gmail.com";
+
 interface SubmitEnv {
     EBI_TOOLS_DATA_DO?: {
         idFromName(name: string): unknown;
@@ -36,7 +38,8 @@ export function registerSubmitJob(server: McpServer, env?: SubmitEnv) {
                 email: z
                     .string()
                     .email()
-                    .describe("Email address (required by EBI API policy)"),
+                    .optional()
+                    .describe(`Email address for EBI API policy (default: ${DEFAULT_EMAIL})`),
                 params: z
                     .record(z.string())
                     .optional()
@@ -67,7 +70,7 @@ export function registerSubmitJob(server: McpServer, env?: SubmitEnv) {
                 }
 
                 const formData: Record<string, string> = {
-                    email: String(args.email),
+                    email: String(args.email || DEFAULT_EMAIL),
                     sequence: String(args.sequence),
                     ...(args.params as Record<string, string> || {}),
                 };

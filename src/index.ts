@@ -3,10 +3,6 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { registerQueryData } from "./tools/query-data";
 import { registerGetSchema } from "./tools/get-schema";
 import { registerCodeMode } from "./tools/code-mode";
-import { registerSubmitJob } from "./tools/submit-job";
-import { registerJobStatus } from "./tools/job-status";
-import { registerJobResult } from "./tools/job-result";
-import { registerListTools } from "./tools/list-tools";
 import { EbiToolsDataDO } from "./do";
 
 export { EbiToolsDataDO };
@@ -24,10 +20,6 @@ export class MyMCP extends McpAgent {
 
     async init() {
         const env = this.env as unknown as EbiToolsEnv;
-        registerSubmitJob(this.server, env);
-        registerJobStatus(this.server, env);
-        registerJobResult(this.server, env);
-        registerListTools(this.server);
         registerQueryData(this.server, env);
         registerGetSchema(this.server, env);
         registerCodeMode(this.server, env);

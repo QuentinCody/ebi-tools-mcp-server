@@ -4,13 +4,12 @@ export const ebiToolsCatalog: ApiCatalog = {
     name: "EBI Job Dispatcher",
     baseUrl: "https://www.ebi.ac.uk/Tools/services/rest",
     version: "1.0",
-    auth: "none (email required for job submission)",
+    auth: "none (email auto-filled for job submission)",
     endpointCount: 36,
     notes:
         "- All tools follow the same pattern: POST /run → GET /status/{jobId} → GET /result/{jobId}/{type}\n" +
-        "- Job submission requires an email parameter\n" +
-        "- For job submission and polling, prefer the hand-built ebi_tools_submit_job tool\n" +
-        "- These Code Mode endpoints are for exploring tool parameters and available result types\n" +
+        "- Email parameter is optional — defaults to configured address if omitted\n" +
+        "- Use Code Mode to submit jobs, poll status, and retrieve results\n" +
         "- Sequence input: FASTA format or plain sequence\n" +
         "- Jobs typically complete in 1-60 seconds depending on the tool",
     endpoints: [

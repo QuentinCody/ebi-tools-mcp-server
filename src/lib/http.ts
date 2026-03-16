@@ -16,8 +16,9 @@ export async function ebiFetch(
     opts?: EbiFetchOptions,
 ): Promise<Response> {
     const baseUrl = opts?.baseUrl ?? EBI_TOOLS_BASE;
+    // Accept both JSON and plain text — status/result endpoints return text/plain
     const headers: Record<string, string> = {
-        Accept: "application/json",
+        Accept: "application/json, text/plain, */*",
         ...(opts?.headers ?? {}),
     };
 
@@ -33,29 +34,25 @@ export async function ebiFetch(
 
 /**
  * POST to submit a job to an EBI tool.
- * Uses form-urlencoded body as required by the API.
+ * Uses raw fetch because restFetch JSON-stringifies body, but EBI needs form-urlencoded.
  */
 export async function ebiSubmitJob(
     toolName: string,
     formData: Record<string, string>,
-    opts?: EbiFetchOptions,
+    _opts?: EbiFetchOptions,
 ): Promise<Response> {
-    const baseUrl = opts?.baseUrl ?? EBI_TOOLS_BASE;
+    const baseUrl = _opts?.baseUrl ?? EBI_TOOLS_BASE;
+    const url = `${baseUrl}/${toolName}/run`;
     const body = new URLSearchParams(formData);
 
-    return restFetch(baseUrl, `/${toolName}/run`, undefined, {
-        ...opts,
+    return fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             Accept: "text/plain",
-            ...(opts?.headers ?? {}),
+            "User-Agent": "ebi-tools-mcp-server/1.0 (bio-mcp)",
         },
-        rawBody: body.toString(),
-        retryOn: [429, 500, 502, 503],
-        retries: opts?.retries ?? 2,
-        timeout: opts?.timeout ?? 60_000,
-        userAgent: "ebi-tools-mcp-server/1.0 (bio-mcp)",
+        body: body.toString(),
     });
 }
 

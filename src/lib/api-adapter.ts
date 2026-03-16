@@ -1,9 +1,29 @@
 import type { ApiFetchFn } from "@bio-mcp/shared/codemode/catalog";
-import { ebiFetch } from "./http";
+import { ebiFetch, ebiSubmitJob } from "./http";
 
 export function createEbiToolsApiFetch(): ApiFetchFn {
     return async (request) => {
-        const response = await ebiFetch(request.path, request.params);
+        let response: Response;
+
+        if (request.method === "POST" && request.body) {
+            // POST to /{tool}/run — extract tool name from path
+            const match = request.path.match(/^\/([^/]+)\/run/);
+            if (match) {
+                const toolName = match[1];
+                const formData: Record<string, string> = {};
+                if (typeof request.body === "object" && request.body !== null) {
+                    for (const [k, v] of Object.entries(request.body as Record<string, unknown>)) {
+                        formData[k] = String(v);
+                    }
+                }
+                response = await ebiSubmitJob(toolName, formData);
+            } else {
+                // Fallback: treat as GET with params
+                response = await ebiFetch(request.path, request.params);
+            }
+        } else {
+            response = await ebiFetch(request.path, request.params);
+        }
 
         if (!response.ok) {
             let errorBody: string;
