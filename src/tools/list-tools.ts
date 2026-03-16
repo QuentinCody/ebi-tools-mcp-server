@@ -11,7 +11,6 @@ export function registerListTools(server: McpServer) {
             title: "List Available EBI Tools",
             description:
                 "List all available EBI bioinformatics tools with their descriptions, categories, and required parameters.",
-            inputSchema: {},
         },
         async () => {
             const tools = EBI_TOOLS.map((t) => ({
