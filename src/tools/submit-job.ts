@@ -41,7 +41,7 @@ export function registerSubmitJob(server: McpServer, env?: SubmitEnv) {
                     .optional()
                     .describe(`Email address for EBI API policy (default: ${DEFAULT_EMAIL})`),
                 params: z
-                    .record(z.string())
+                    .record(z.string(), z.string())
                     .optional()
                     .describe("Additional tool-specific parameters as key-value pairs (e.g. {\"program\": \"blastp\", \"database\": \"uniprotkb_swissprot\"})"),
                 result_type: z
