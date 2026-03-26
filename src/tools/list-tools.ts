@@ -4,7 +4,7 @@ import {
     createCodeModeResponse,
 } from "@bio-mcp/shared/codemode/response";
 
-export function registerListTools(server: McpServer) {
+export function registerListTools(server: McpServer): void {
     server.registerTool(
         "ebi_tools_list_tools",
         {

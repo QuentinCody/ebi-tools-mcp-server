@@ -6,7 +6,7 @@ import {
     createCodeModeError,
 } from "@bio-mcp/shared/codemode/response";
 
-export function registerJobStatus(server: McpServer, _env?: unknown) {
+export function registerJobStatus(server: McpServer, _env?: unknown): void {
     server.registerTool(
         "ebi_tools_job_status",
         {

@@ -6,7 +6,7 @@ interface SchemaEnv {
     EBI_TOOLS_DATA_DO?: unknown;
 }
 
-export function registerGetSchema(server: McpServer, env?: SchemaEnv) {
+export function registerGetSchema(server: McpServer, env?: SchemaEnv): void {
     const handler = createGetSchemaHandler("EBI_TOOLS_DATA_DO", "ebi_tools");
 
     server.registerTool(

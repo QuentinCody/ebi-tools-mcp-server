@@ -6,7 +6,7 @@ interface QueryEnv {
     EBI_TOOLS_DATA_DO?: unknown;
 }
 
-export function registerQueryData(server: McpServer, env?: QueryEnv) {
+export function registerQueryData(server: McpServer, env?: QueryEnv): void {
     const handler = createQueryDataHandler("EBI_TOOLS_DATA_DO", "ebi_tools");
 
     server.registerTool(

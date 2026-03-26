@@ -17,7 +17,7 @@ interface SubmitEnv {
     };
 }
 
-export function registerSubmitJob(server: McpServer, env?: SubmitEnv) {
+export function registerSubmitJob(server: McpServer, env?: SubmitEnv): void {
     server.registerTool(
         "ebi_tools_submit_job",
         {
@@ -108,7 +108,7 @@ export function registerSubmitJob(server: McpServer, env?: SubmitEnv) {
                 if (shouldStage(responseSize) && runtimeEnv?.EBI_TOOLS_DATA_DO) {
                     const staged = await stageToDoAndRespond(
                         resultData,
-                        runtimeEnv.EBI_TOOLS_DATA_DO as any,
+                        runtimeEnv.EBI_TOOLS_DATA_DO as DurableObjectNamespace,
                         `${toolName}_result`,
                         undefined,
                         undefined,

@@ -14,7 +14,7 @@ interface ResultEnv {
     };
 }
 
-export function registerJobResult(server: McpServer, env?: ResultEnv) {
+export function registerJobResult(server: McpServer, env?: ResultEnv): void {
     server.registerTool(
         "ebi_tools_job_result",
         {
@@ -56,7 +56,7 @@ export function registerJobResult(server: McpServer, env?: ResultEnv) {
                 if (shouldStage(responseSize) && runtimeEnv?.EBI_TOOLS_DATA_DO) {
                     const staged = await stageToDoAndRespond(
                         resultData,
-                        runtimeEnv.EBI_TOOLS_DATA_DO as any,
+                        runtimeEnv.EBI_TOOLS_DATA_DO as DurableObjectNamespace,
                         `${toolName}_result`,
                         undefined,
                         undefined,
