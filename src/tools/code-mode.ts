@@ -23,6 +23,8 @@ export function registerCodeMode(
 
     const executeTool = createExecuteTool({
         prefix: "ebi_tools",
+        // Verifiable provenance: ebi_tools_execute results carry a _meta.citation.
+        source: { id: "ebi_tools", name: "EMBL-EBI Job Dispatcher", url: "https://www.ebi.ac.uk/jdispatcher" },
         catalog: ebiToolsCatalog,
         apiFetch,
         doNamespace: env.EBI_TOOLS_DATA_DO,

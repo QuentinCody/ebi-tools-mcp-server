@@ -61,7 +61,7 @@ export function registerJobResult(server: McpServer, env?: ResultEnv): void {
                         undefined,
                         undefined,
                         "ebi_tools",
-                        (extra as { sessionId?: string })?.sessionId,
+                        (extra as Record<string, unknown>),
                     );
                     return createCodeModeResponse(
                         {
