@@ -64,7 +64,7 @@ for (const { path: filePath, required } of toolExpectations) {
 
 const indexContent = readFile('src/index.ts');
 assertContains('src/index.ts', indexContent, 'EbiToolsDataDO', 'index.ts exports EbiToolsDataDO');
-assertContains('src/index.ts', indexContent, 'McpAgent', 'index.ts uses McpAgent');
+assertContains('src/index.ts', indexContent, 'StatelessMcpWorker', 'index.ts uses StatelessMcpWorker');
 
 console.log(`\n${BLUE}📊 Test Results Summary${RESET}`);
 console.log(`Total tests: ${totalTests}`);

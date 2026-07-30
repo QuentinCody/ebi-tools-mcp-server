@@ -1,4 +1,4 @@
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@bio-mcp/shared/mcp";
 import { EBI_TOOLS } from "../lib/tools-registry";
 import {
     createCodeModeResponse,
