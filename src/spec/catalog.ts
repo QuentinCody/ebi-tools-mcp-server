@@ -5,7 +5,7 @@ export const ebiToolsCatalog: ApiCatalog = {
     baseUrl: "https://www.ebi.ac.uk/Tools/services/rest",
     version: "1.0",
     auth: "none (email auto-filled for job submission)",
-    endpointCount: 36,
+    endpointCount: 18,
     notes:
         "- All tools follow the same pattern: POST /run → GET /status/{jobId} → GET /result/{jobId}/{type}\n" +
         "- Email parameter is optional — defaults to configured address if omitted\n" +
