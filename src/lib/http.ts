@@ -47,6 +47,7 @@ export async function ebiSubmitJob(
 
     return fetch(url, {
         method: "POST",
+        signal: AbortSignal.timeout(_opts?.timeout ?? 30_000),
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             Accept: "text/plain",

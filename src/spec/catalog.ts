@@ -1,18 +1,19 @@
 import type { ApiCatalog } from "@bio-mcp/shared/codemode/catalog";
+import { jobEndpoints, jobNotes } from "./jobs";
 
 export const ebiToolsCatalog: ApiCatalog = {
     name: "EBI Job Dispatcher",
     baseUrl: "https://www.ebi.ac.uk/Tools/services/rest",
     version: "1.0",
-    auth: "none (email auto-filled for job submission)",
-    endpointCount: 18,
-    notes:
+    auth: "none (valid email required for job submission)",
+    endpointCount: 25,
+    notes: jobNotes +
         "- All tools follow the same pattern: POST /run → GET /status/{jobId} → GET /result/{jobId}/{type}\n" +
-        "- Email parameter is optional — defaults to configured address if omitted\n" +
         "- Use Code Mode to submit jobs, poll status, and retrieve results\n" +
         "- Sequence input: FASTA format or plain sequence\n" +
-        "- Jobs typically complete in 1-60 seconds depending on the tool",
+        "- Job duration varies; preserve handles and resume bounded polling across calls",
     endpoints: [
+        ...jobEndpoints,
         // === Tool Parameter Info ===
         {
             method: "GET",
