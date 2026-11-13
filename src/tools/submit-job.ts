@@ -8,7 +8,8 @@ import {
 } from "@bio-mcp/shared/codemode/response";
 import { shouldStage, stageToDoAndRespond } from "@bio-mcp/shared/staging/utils";
 
-const DEFAULT_EMAIL = "QuentinCody@gmail.com";
+// EBI requires a contact email per job. This one is public (tool descriptions show it): never a personal address.
+const DEFAULT_EMAIL = "support@quentincody.dev";
 
 interface SubmitEnv {
     EBI_TOOLS_DATA_DO?: {
